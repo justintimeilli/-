@@ -100,7 +100,7 @@ export default function App() {
             timestamp: new Date().toLocaleTimeString(),
             turn: prev.turn,
             speaker: 'GM',
-            text: `📢 생명력이 다한 영웅이 쓰러집니다! 하스스톤 대전이 종결되었습니다. 최종 승리자: [${winner === 'player' ? '플레이어님' : '상대편 AI'}]!`
+            text: `📢 생명력이 다한 영웅이 쓰러집니다! 마나 워즈 대전이 종결되었습니다. 최종 승리자: [${winner === 'player' ? '플레이어님' : '상대편 AI'}]!`
           });
 
           return {
@@ -615,7 +615,7 @@ export default function App() {
       const data = await response.json();
       if (data && !data.useLocalFallback) {
         aiActions = data.actions || [];
-        commentary = data.commentary || "하하! 나의 완벽한 하스스톤 두뇌의 턴이다!";
+        commentary = data.commentary || "하하! 나의 완벽한 마나 워즈 두뇌의 턴이다!";
         apiSuccess = true;
       }
     } catch (err) {
@@ -2306,11 +2306,11 @@ export default function App() {
       <header className="bg-[#180f0a]/92 backdrop-blur-md border-b-2 border-[#3e2516] px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-[0_6px_30px_rgba(0,0,0,0.7)]">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 rounded-xl flex items-center justify-center text-slate-950 font-black text-xl shadow-[0_0_20px_rgba(245,158,11,0.5)] border border-amber-300/40 transform transition hover:rotate-6 cursor-pointer">
-            H
+            M
           </div>
           <div>
             <h1 className="text-lg font-black tracking-tight text-amber-405 font-sans flex items-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              하스스톤 대여관 시뮬레이터 <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/40 font-mono tracking-wider font-extrabold shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)]">TEXT & BOARD</span>
+              마나 워즈 <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/40 font-mono tracking-wider font-extrabold shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)]">TEXT & BOARD</span>
             </h1>
             <p className="text-[11px] text-amber-100/70 font-semibold tracking-wide drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">정통 룰과 아름다운 여관 배경을 완벽히 재현하는 덱 대전</p>
           </div>
@@ -2358,7 +2358,7 @@ export default function App() {
               대여관 침묵의 전장속에 오신 것을 환영합니다!
             </h2>
             <p className="text-amber-100/80 text-sm leading-relaxed font-sans max-w-xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-medium">
-              본 게임은 정통 하스스톤의 체력 30 규칙, 마나 증가, 도발 보호막, 전투의 함성, 돌진, 천상의 보호막, 죽음의 메아리를 철저히 시뮬레이션합니다. 
+              본 게임은 정통 마나 워즈의 체력 30 규칙, 마나 증가, 도발 보호막, 전투의 함성, 돌진, 천상의 보호막, 죽음의 메아리를 철저히 시뮬레이션합니다. 
               플레이 방식은 아름다운 마우스 인터랙션과 키보드 명령어 프롬프트를 모두 지원합니다.
             </p>
           </div>
@@ -2667,7 +2667,7 @@ export default function App() {
               <div>
                 <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider font-mono">✦ CARDS REPOSITORY ✦</span>
                 <h2 className="text-2xl font-black text-[#f5f5f4] tracking-tight flex items-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                  하스스톤 자유 카드 보관소
+                  마나 워즈 자유 카드 보관소
                 </h2>
                 <p className="text-xs text-amber-100/60 font-medium">검색과 마나 크리스탈 필터를 활용해 원하는 전술을 신속히 발굴하십시오.</p>
               </div>
@@ -2880,7 +2880,7 @@ export default function App() {
                 ACTIVE BUILD DECK
               </span>
               <h3 className="text-lg font-black text-[#fdfdfd] mt-1">나의 구축 덱 (Deck)</h3>
-              <p className="text-[11px] text-slate-400/90 font-medium">하스스톤 대여관 규칙: 딱 40장을 채우십시오.</p>
+              <p className="text-[11px] text-slate-400/90 font-medium">마나 워즈 대전 규칙: 딱 40장을 채우십시오.</p>
             </div>
 
             {/* Deck size status & visual bar */}
@@ -3177,7 +3177,7 @@ export default function App() {
               첫 손패 전술 결정
             </h1>
             <p className="text-slate-400 text-sm mt-3 leading-relaxed">
-              실제 하스스톤 게임 방식처럼 4장의 카드가 선별되었습니다. 갖기 싫은 카드를 마우스로 클릭하여 <span className="text-red-400 font-extrabold font-mono">X 교체표시</span>로 지정하십시오. 해당 카드를 내 덱에 다시 섞어 넣고 새로운 무작위 카드로 긴급 대체된 후 본격 전장 대전을 개시합니다.
+              실제 마나 워즈 게임 방식처럼 4장의 카드가 선별되었습니다. 갖기 싫은 카드를 마우스로 클릭하여 <span className="text-red-400 font-extrabold font-mono">X 교체표시</span>로 지정하십시오. 해당 카드를 내 덱에 다시 섞어 넣고 새로운 무작위 카드로 긴급 대체된 후 본격 전장 대전을 개시합니다.
             </p>
           </div>
 

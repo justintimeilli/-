@@ -123,7 +123,7 @@ export function RulebookModal({ isOpen, onClose }: RulebookModalProps) {
                   <div>
                     <h3 className="font-bold text-slate-100 flex items-center gap-2">마나와 생명력, 그리고 카드 템포의 전설</h3>
                     <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                      하스스톤 대여관 시뮬레이터는 정통 1대1 선술집 카드 배틀 게임의 규칙을 충실히 구현한 실전 테이블 대전 기입니다. 
+                      마나 워즈는 정통 1대1 선술집 카드 배틀 게임의 규칙을 충실히 구현한 실전 테이블 대전 기입니다. 
                       각 영웅은 생명력 30을 가지며, 상대방의 피를 0이하로 만드는 승부사가 대승리를 쟁취합니다.
                     </p>
                   </div>
@@ -301,7 +301,7 @@ export function RulebookModal({ isOpen, onClose }: RulebookModalProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-6"
               >
-                <h3 className="text-slate-100 font-bold text-sm">대여관 시뮬레이터 주요 핵심 카드 해설첩</h3>
+                <h3 className="text-slate-100 font-bold text-sm">마나 워즈 주요 핵심 카드 해설첩</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   
@@ -434,7 +434,7 @@ export function RulebookModal({ isOpen, onClose }: RulebookModalProps) {
           {/* Footer controls */}
           <div className="px-6 py-4 bg-[#0d0e14] border-t border-[#1b1c23] flex flex-col md:flex-row items-center justify-between gap-3">
             <span className="text-xs text-slate-500">
-              대여관 전용 샌드박스 대전 시뮬레이터 v1.22 • Hearthstone Sandbox Edition
+              마나 워즈 샌드박스 대전 시뮬레이터 v1.22 • Mana Wars Sandbox Edition
             </span>
             <button
               onClick={onClose}

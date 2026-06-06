@@ -1,6 +1,6 @@
 {
-  "name": "하스스톤 텍스트 카드 시뮬레이터",
-  "description": "하스스톤의 정통 규칙을 따르는 텍스트 및 그래픽 턴제 카드 게임 시뮬레이터입니다. 인공지능(AI)과 카드 드래프트를 진행하고 대결하며, 게임 마스터가 생생한 해설을 더해줍니다.",
+  "name": "마나 워즈",
+  "description": "마나 워즈의 정통 규칙을 따르는 텍스트 및 그래픽 턴제 카드 게임 시뮬레이터입니다. 인공지능(AI)과 카드 드래프트를 진행하고 대결하며, 게임 마스터가 생생한 해설을 더해줍니다.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

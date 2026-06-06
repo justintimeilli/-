@@ -124,7 +124,7 @@ export function createInitialState(
     timestamp,
     turn: 1,
     speaker: 'GM',
-    text: `🃏 하스스톤 대전이 시작되었습니다! 선택한 덱: '${deckName}'.`
+    text: `🃏 마나 워즈 대전이 시작되었습니다! 선택한 덱: '${deckName}'.`
   });
 
   pLogs.push({
