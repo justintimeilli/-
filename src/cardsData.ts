@@ -1596,74 +1596,285 @@ export const CARD_POOL: Card[] = [
     description: '전투의 함성: 푸른 비전성운의 폭발로 적 하수인들에게 일제히 광역 5 대미지 포화를 흩뿌려 선사합니다.',
     effectId: 'aoe_enemies_all',
     effectValue: 5
+  },
+  // --- 비밀 & 토템 & 악마 & 신규 카드군 ---
+  {
+    id: 's_explosive_trap',
+    templateId: 's_explosive_trap',
+    name: '비밀: 폭발의 덫 (Secret)',
+    cost: 2,
+    type: 'spell',
+    rarity: 'rare',
+    description: '🛡️ 비밀: 상대방 필드의 모든 대원에게 피해를 2 줍니다. (격발 시 대기 없이 소탕 피해 시전)',
+    effectId: 'aoe_enemies',
+    effectValue: 2
+  },
+  {
+    id: 's_ice_barrier',
+    templateId: 's_ice_barrier',
+    name: '비밀: 얼음 화막 (Secret)',
+    cost: 3,
+    type: 'spell',
+    rarity: 'rare',
+    description: '🛡️ 비밀: 아군 영웅이 차가운 비호를 입어 즉시 생명력을 8 회복합니다.',
+    effectId: 'heal_hero',
+    effectValue: 8
+  },
+  {
+    id: 'm_flametongue_totem',
+    templateId: 'm_flametongue_totem',
+    name: '불꽃의 토템 (Totem)',
+    cost: 2,
+    type: 'minion',
+    rarity: 'common',
+    atk: 0,
+    hp: 3,
+    keywords: ['Battlecry'],
+    description: '토템. 전투의 함성: 모든 아군 하수인에게 피의 기세를 휘감아 영구히 공격력 +2를 증폭합니다.',
+    effectId: 'bloodlust',
+    effectValue: 2
+  },
+  {
+    id: 'm_healing_totem',
+    templateId: 'm_healing_totem',
+    name: '치유의 토템 (Totem)',
+    cost: 1,
+    type: 'minion',
+    rarity: 'common',
+    atk: 0,
+    hp: 2,
+    keywords: ['Battlecry'],
+    description: '토템. 전투의 함성: 구원 구도를 세워 아군 영웅의 체력을 6 치유 회복합니다.',
+    effectId: 'heal_hero',
+    effectValue: 6
+  },
+  {
+    id: 'm_jaraxxus',
+    templateId: 'm_jaraxxus',
+    name: '군주 자락서스 (Demon)',
+    cost: 9,
+    type: 'minion',
+    rarity: 'legendary',
+    atk: 3,
+    hp: 15,
+    keywords: ['Battlecry'],
+    description: '악마. 전투의 함성: 내 영웅이 지옥의 기운을 받아 즉시 체력을 15 회복합니다.',
+    effectId: 'heal_hero',
+    effectValue: 15
+  },
+  {
+    id: 'm_tirion_fordring',
+    templateId: 'm_tirion_fordring',
+    name: '티리온 폴드링',
+    cost: 8,
+    type: 'minion',
+    rarity: 'legendary',
+    atk: 6,
+    hp: 6,
+    keywords: ['Taunt', 'Divine Shield', 'Deathrattle'],
+    description: '도발, 천상의 보호막. 죽음의 메아리: 공격력 5, 내구력 3 성검 [파멸의 인도자]를 영웅 슬롯에 장비합니다.',
+    effectId: 'equip_ashbringer'
+  },
+  {
+    id: 'w_frostmourne',
+    templateId: 'w_frostmourne',
+    name: '서리한 (Frostmourne)',
+    cost: 7,
+    type: 'weapon',
+    rarity: 'legendary',
+    atk: 5,
+    durability: 3,
+    description: '리치 왕의 저주받은 룬 마검입니다. 휘두를 때마다 찬 공기를 뿜습니다.'
+  },
+  // --- 퀘스트 카드 & 전설 보상 카드 세트 ---
+  {
+    id: 's_quest_mage',
+    templateId: 's_quest_mage',
+    name: '신비한 비전 왜곡 (Quest)',
+    cost: 1,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🛡️ [공동 퀘스트] 아호! 주문을 3회 시전하십시오. 보상: 전설 주문 [대마법사의 지혜] 획득!',
+    effectId: 'quest_mage'
+  },
+  {
+    id: 's_quest_mage_reward',
+    templateId: 's_quest_mage_reward',
+    name: '대마법사의 지혜 (Reward)',
+    cost: 2,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🔮 [퀘스트 보상] 내 가용 마나를 가득 채우고, 카드를 4장 뽑으며 체력을 10 치유 복구합니다.',
+    effectId: 'quest_mage_reward'
+  },
+  {
+    id: 's_quest_priest',
+    templateId: 's_quest_priest',
+    name: '깨어난 자들의 사명 (Quest)',
+    cost: 1,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🛡️ [공동 퀘스트] 도발 하수인을 2회 소환하십시오. 보상: 전설 하수인 [희망의 인도자 아마라] 획득!',
+    effectId: 'quest_priest'
+  },
+  {
+    id: 'm_quest_priest_reward',
+    templateId: 'm_quest_priest_reward',
+    name: '희망의 인도자 아마라 (Reward)',
+    cost: 4,
+    type: 'minion',
+    rarity: 'legendary',
+    atk: 8,
+    hp: 8,
+    keywords: ['Taunt', 'Battlecry'],
+    description: '도발. 전투의 함성: 아군 영웅의 최대 생명력을 40으로 높이고, 체력을 40으로 풀 회복시킵니다!',
+    effectId: 'quest_priest_reward'
+  },
+  {
+    id: 's_quest_paladin',
+    templateId: 's_quest_paladin',
+    name: '빛의 연합 구축 (Quest)',
+    cost: 1,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🛡️ [공동 퀘스트] 천상의 보호막 하수인을 2회 소환하십시오. 보상: 전설 하수인 [거대 공룡 갈바돈] 획득!',
+    effectId: 'quest_paladin'
+  },
+  {
+    id: 'm_quest_paladin_reward',
+    templateId: 'm_quest_paladin_reward',
+    name: '거대 공룡 갈바돈 (Reward)',
+    cost: 5,
+    type: 'minion',
+    rarity: 'legendary',
+    atk: 8,
+    hp: 8,
+    keywords: ['Taunt', 'Divine Shield', 'Charge'],
+    description: '도발, 천상의 보호막, 돌진. 궁극의 포식 공룡입니다.',
+    effectId: 'quest_paladin_reward'
+  },
+  {
+    id: 's_quest_hunter',
+    templateId: 's_quest_hunter',
+    name: '맹수 사냥 준비 (Quest)',
+    cost: 1,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🛡️ [공동 퀘스트] 1코스트 카드를 3회 사용하십시오. 보상: 전설 하수인 [여왕 카르나사] 획득!',
+    effectId: 'quest_hunter'
+  },
+  {
+    id: 'm_quest_hunter_reward',
+    templateId: 'm_quest_hunter_reward',
+    name: '여왕 카르나사 (Reward)',
+    cost: 6,
+    type: 'minion',
+    rarity: 'legendary',
+    atk: 8,
+    hp: 8,
+    keywords: ['Battlecry'],
+    description: '전투의 함성: 적 영웅 본체에 즉시 지옥의 가래침을 쏘아 피해를 12 줍니다.',
+    effectId: 'quest_hunter_reward'
+  },
+  {
+    id: 's_quest_warrior',
+    templateId: 's_quest_warrior',
+    name: '방어선 사수 (Quest)',
+    cost: 1,
+    type: 'spell',
+    rarity: 'legendary',
+    description: '🛡️ [공동 퀘스트] 공격력 5 이상의 하수인을 2회 소환하십시오. 보상: 전설 무기 [파괴의 불길 설퍼라스] 획득!',
+    effectId: 'quest_warrior'
+  },
+  {
+    id: 'w_quest_warrior_reward',
+    templateId: 'w_quest_warrior_reward',
+    name: '파괴의 불길 설퍼라스 (Reward)',
+    cost: 4,
+    type: 'weapon',
+    rarity: 'legendary',
+    atk: 6,
+    durability: 3,
+    description: '장착 시 즉시 무작위 적(영웅 혹은 하수인)에게 8의 불덩이 대미지를 발사합니다.',
+    effectId: 'quest_warrior_reward'
   }
 ];
 
+// Helper to safely fetch card templates from CARD_POOL by ID
+function findCardById(id: string): Card {
+  const found = CARD_POOL.find(c => c.id === id);
+  if (!found) {
+    // Fallback if cards are missing to prevent any runtime exceptions
+    return CARD_POOL[0];
+  }
+  return found;
+}
+
 export const PREBUILT_AGGRO_DECK: Card[] = [
-  CARD_POOL[1], CARD_POOL[1], // 오염된 노움 *2
-  CARD_POOL[2], CARD_POOL[2], // 골드샤이어 보초병 *2
-  CARD_POOL[4], CARD_POOL[4], // 돌진하는 멧돼지 *2
-  CARD_POOL[5], CARD_POOL[5], // 부두교 의술사 *2
-  CARD_POOL[6], CARD_POOL[6], // 신비한 화살 *2
-  CARD_POOL[11], CARD_POOL[11], // 푸른지느러미 전사 *2
-  CARD_POOL[52], CARD_POOL[52], // 멀록 습격자 *2
-  CARD_POOL[54], CARD_POOL[54], // 야수 무리늑대 *2
-  CARD_POOL[13], CARD_POOL[13], // 늑대기수 *2
-  CARD_POOL[23], CARD_POOL[23], // 이글거리는 도끼 *2
-  CARD_POOL[26], CARD_POOL[26], // 화염구 *2
-  CARD_POOL[38], CARD_POOL[38], // 피의 욕망 *2
-  CARD_POOL[66], CARD_POOL[66], // 야생의 포효 *2
-  CARD_POOL[67], CARD_POOL[67], // 영웅의 격노격 *2
-  CARD_POOL[45], CARD_POOL[45], // 심장부 사냥개 *2
-  CARD_POOL[81], CARD_POOL[81], // 가혹한 하사관 *2 (신규)
-  CARD_POOL[87], CARD_POOL[87], // 광포한 늑대 우두머리 *2 (신규)
-  CARD_POOL[88], CARD_POOL[88], // 단검 곡예사 *2 (신규)
-  CARD_POOL[85], CARD_POOL[85], // 전리품 수집가 *2 (드로우 카드, 신규)
-  CARD_POOL[116], CARD_POOL[116] // 은빛십자군 부대장 *2 (신규)
+  findCardById('m_leper_gnome'), findCardById('m_leper_gnome'), // 오염된 노움 *2
+  findCardById('m_goldshire_footman'), findCardById('m_goldshire_footman'), // 골드샤이어 보초병 *2
+  findCardById('m_stonetusk_boar'), findCardById('m_stonetusk_boar'), // 돌진하는 멧돼지 *2
+  findCardById('m_flametongue_totem'), findCardById('m_flametongue_totem'), // 불꽃의 토템 (신규 토템 추가!) *2
+  findCardById('s_arcane_shot'), findCardById('s_arcane_shot'), // 신비한 화살 *2
+  findCardById('m_bluegill_warrior'), findCardById('m_bluegill_warrior'), // 푸른지느러미 전사 *2
+  findCardById('s_explosive_trap'), findCardById('s_explosive_trap'), // 비밀: 폭발의 덫 (신규 비밀 추가!) *2
+  findCardById('m_wolf_companion'), findCardById('m_wolf_companion'), // 야수 무리늑대 *2
+  findCardById('m_wolfrider'), findCardById('m_wolfrider'), // 늑대기수 *2
+  findCardById('w_fiery_war_axe'), findCardById('w_fiery_war_axe'), // 이글거리는 도끼 *2
+  findCardById('s_fireball'), findCardById('s_fireball'), // 화염구 *2
+  findCardById('s_bloodlust'), findCardById('s_bloodlust'), // 피의 욕망 *2
+  findCardById('s_savage_roar'), findCardById('s_savage_roar'), // 야생의 포효 *2
+  findCardById('s_heroic_strike'), findCardById('s_heroic_strike'), // 영웅의 격노격 *2
+  findCardById('m_core_hound'), findCardById('m_core_hound'), // 심장부 사냥개 *2
+  findCardById('m_abusive_sergeant'), findCardById('m_abusive_sergeant'), // 가혹한 하사관 *2 (신규)
+  findCardById('m_dire_wolf_alpha'), findCardById('m_dire_wolf_alpha'), // 광포한 늑대 우두머리 *2 (신규)
+  findCardById('m_knife_juggler'), findCardById('m_knife_juggler'), // 단검 곡예사 *2 (신규)
+  findCardById('m_loot_hoarder'), findCardById('m_loot_hoarder'), // 전리품 수집가 *2 (드로우 카드, 신규)
+  findCardById('m_argent_commander'), findCardById('m_argent_commander') // 은빛십자군 부대장 *2 (신규)
 ];
 
 export const PREBUILT_MIDRANGE_DECK: Card[] = [
-  CARD_POOL[0], CARD_POOL[0], // 엘프 궁수 *2
-  CARD_POOL[3], CARD_POOL[3], // 은빛십자군 종자 *2
-  CARD_POOL[9], CARD_POOL[9], // 민물맹독충 *2
-  CARD_POOL[10], CARD_POOL[10], // 산성 늪수렁 괴물 *2
-  CARD_POOL[12], CARD_POOL[12], // 풋내기 기술자 *2
-  CARD_POOL[14], CARD_POOL[14], // 얼음 화살 *2
-  CARD_POOL[18], CARD_POOL[18], // 무쇠가죽 곰 *2
-  CARD_POOL[21], CARD_POOL[21], // 대지 고리 선견자 *2
-  CARD_POOL[25], CARD_POOL[25], // 센진 방패대가 *2
-  CARD_POOL[26], CARD_POOL[26], // 서리바람 예티 *2
-  CARD_POOL[28], CARD_POOL[28], // 주문파괴자 *2
-  CARD_POOL[30], CARD_POOL[30], // 신성화 *2
-  CARD_POOL[35], CARD_POOL[35], // 썩은가죽 벼룩 *2
-  CARD_POOL[40], CARD_POOL[40], // 돌주먹 오우거 *2
-  CARD_POOL[46], CARD_POOL[46], // 스톰윈드 용사 *2
-  CARD_POOL[78], CARD_POOL[78], // 북녘골 성직자 *2 (드로우 카드, 신규)
-  CARD_POOL[101], CARD_POOL[101], // 아르거스의 수호자 *2 (신규)
-  CARD_POOL[102], CARD_POOL[102], // 물의 정령 *2 (신규)
-  CARD_POOL[107], CARD_POOL[107], // 하늘빛 비룡 *2 (드로우 카드, 신규)
-  CARD_POOL[110], CARD_POOL[110] // 발톱의 고대정령 *2 (신규)
+  findCardById('m_elven_archer'), findCardById('m_elven_archer'), // 엘프 궁수 *2
+  findCardById('m_argent_squire'), findCardById('m_argent_squire'), // 은빛십자군 종자 *2
+  findCardById('m_bloodfen_raptor'), findCardById('m_bloodfen_raptor'), // 민물맹독충 *2
+  findCardById('m_acidic_ooze'), findCardById('m_acidic_ooze'), // 산성 늪수렁 괴물 *2
+  findCardById('m_novice_engineer'), findCardById('m_novice_engineer'), // 풋내기 기술자 *2
+  findCardById('s_frostbolt'), findCardById('s_frostbolt'), // 얼음 화살 *2
+  findCardById('m_ironfur_grizzly'), findCardById('m_ironfur_grizzly'), // 무쇠가죽 곰 *2
+  findCardById('m_earthen_farseer'), findCardById('m_earthen_farseer'), // 대지 고리 선견자 *2
+  findCardById('m_healing_totem'), findCardById('m_healing_totem'), // 치유의 토템 (신규 토템 추가!) *2
+  findCardById('s_ice_barrier'), findCardById('s_ice_barrier'), // 비밀: 얼음 화막 (신규 비밀 추가!) *2
+  findCardById('m_senjin_shieldmasta'), findCardById('m_senjin_shieldmasta'), // 센진 방패대가 *2
+  findCardById('m_chillwind_yeti'), findCardById('m_chillwind_yeti'), // 서리바람 예티 *2
+  findCardById('m_spellbreaker'), findCardById('m_spellbreaker'), // 주문파괴자 *2
+  findCardById('s_consecration'), findCardById('s_consecration'), // 신성화 *2
+  findCardById('m_sludge_belcher'), findCardById('m_sludge_belcher'), // 썩은가죽 벼룩 *2
+  findCardById('m_boulderfist_ogre'), findCardById('m_boulderfist_ogre'), // 돌주먹 오우거 *2
+  findCardById('m_stormwind_champion'), findCardById('m_stormwind_champion'), // 스톰윈드 용사 *2
+  findCardById('m_northshire_cleric'), findCardById('m_northshire_cleric'), // 북녘골 성직자 *2 (드로우 카드, 신규)
+  findCardById('m_defender_of_argus'), findCardById('m_defender_of_argus'), // 아르거스의 수호자 *2 (신규)
+  findCardById('m_water_elemental'), findCardById('m_water_elemental') // 물의 정령 *2 (신규)
 ];
 
 export const PREBUILT_CONTROL_DECK: Card[] = [
-  CARD_POOL[2], CARD_POOL[2], // 골드샤이어 보초병 *2
-  CARD_POOL[7], CARD_POOL[7], // 신의 권능 보호막 *2
-  CARD_POOL[15], CARD_POOL[15], // 성스러운 빛 *2
-  CARD_POOL[18], CARD_POOL[18], // 무쇠가죽 곰 *2
-  CARD_POOL[21], CARD_POOL[21], // 대지 고리 선견자 *2
-  CARD_POOL[24], CARD_POOL[24], // 신비한 지능 *2
-  CARD_POOL[25], CARD_POOL[25], // 센진 방패대가 *2
-  CARD_POOL[26], CARD_POOL[26], // 서리바람 예티 *2
-  CARD_POOL[27], CARD_POOL[27], // 노움 발명가 *2
-  CARD_POOL[31], CARD_POOL[31], // 변이 *2
-  CARD_POOL[32], CARD_POOL[32], // 진은검 *2
-  CARD_POOL[37], CARD_POOL[37], // 암살 *2
-  CARD_POOL[42], CARD_POOL[42], // 눈보라 *2
-  CARD_POOL[47], CARD_POOL[47], // 불기둥 *2
-  CARD_POOL[49], CARD_POOL[49], // 티리온 폴드링 *2
-  CARD_POOL[93], CARD_POOL[93], // 고통의 수행사제 *2 (드로우 카드, 신규)
-  CARD_POOL[112], CARD_POOL[112], // 육성 *2 (드로우 카드, 신규)
-  CARD_POOL[114], CARD_POOL[114], // 실바나스 윈드러너 *2 (신규)
-  CARD_POOL[121], CARD_POOL[121], // 늪지 이끼괴물 *2 (신규)
-  CARD_POOL[123], CARD_POOL[123] // 지배자 켈투사드 *2 (신규)
+  findCardById('s_quest_mage'), findCardById('s_quest_priest'), // 전설 퀘스트(마법사/사제) 대전 시험용 추가!
+  findCardById('s_shield_buff'), findCardById('s_shield_buff'), // 신의 권능 보호막 *2
+  findCardById('s_healing_touch'), findCardById('s_healing_touch'), // 성스러운 빛 *2
+  findCardById('m_ironfur_grizzly'), findCardById('m_ironfur_grizzly'), // 무쇠가죽 곰 *2
+  findCardById('m_earthen_farseer'), findCardById('m_earthen_farseer'), // 대지 고리 선견자 *2
+  findCardById('s_arcane_intellect'), findCardById('s_arcane_intellect'), // 신비한 지능 *2
+  findCardById('m_senjin_shieldmasta'), findCardById('m_senjin_shieldmasta'), // 센진 방패대가 *2
+  findCardById('m_chillwind_yeti'), findCardById('m_chillwind_yeti'), // 서리바람 예티 *2
+  findCardById('m_gnomish_inventor'), findCardById('m_gnomish_inventor'), // 노움 발명가 *2
+  findCardById('s_polymorph'), findCardById('s_polymorph'), // 변이 *2
+  findCardById('w_truesilver_champion'), findCardById('w_truesilver_champion'), // 진은검 *2
+  findCardById('s_assassinate'), findCardById('s_assassinate'), // 암살 *2
+  findCardById('s_blizzard'), findCardById('s_blizzard'), // 눈보라 *2
+  findCardById('s_flamestrike'), findCardById('s_flamestrike'), // 불기둥 *2
+  findCardById('m_jaraxxus'), findCardById('m_jaraxxus'), // 군주 자락서스 (신규 전설 악마) *2
+  findCardById('m_tirion_fordring'), findCardById('m_tirion_fordring'), // 티리온 폴드링 (신규 장장) *2
+  findCardById('w_frostmourne'), findCardById('w_frostmourne'), // 서리한 (명품 무기 추가) *2
+  findCardById('m_acolyte_of_pain'), findCardById('m_acolyte_of_pain'), // 고통의 수행사제 *2 (드로우 카드, 신규)
+  findCardById('s_nourish'), findCardById('s_nourish'), // 육성 *2 (드로우 카드, 신규)
+  findCardById('m_sylvanas_windrunner'), findCardById('m_sylvanas_windrunner') // 실바나스 윈드러너 *2 (신규)
 ];

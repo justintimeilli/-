@@ -148,6 +148,7 @@ app.post("/api/game/ai-play", async (req, res) => {
 - 수면 상태(isAsleep: false)이고 공격하지 않은(hasAttackedThisTurn: false) 하수인만 공격할 수 있습니다.
 - 상대방 필드에 '도발(Taunt)' 키워드를 가진 하수인이 하나라도 있다면, 다른 하수인이나 적 영웅을 수동으로 일반 타격할 수 없습니다. 무조건 도발 하수인을 먼저 공격하여 소멸시키거나 우회해야 합니다.
 - 영웅의 무기가 장착되어 있는 상태에서 공격 가능 횟수가 있다면 영웅으로도 공격을 수행할 수 있습니다 (소비 마나 없음, 턴당 1회 최대).
+- 영웅 능력 (Hero Power): 만약 영웅 능력 사용 상태(usedHeroPower가 false이고 남은 마나 2 이상)인 경우, 영웅 능력("type": "HERO_POWER")을 턴당 최대 한 번 시전하여 전장을 소환/피해/치유시킵니다. 직업별 영능: 마법사(Mage: 대상 1뎀), 사제(Priest: 대상 2힐), 성기사(Paladin: 1/1 신병소환), 사냥꾼(Hunter: 적영웅 2뎀), 전사(Warrior: 방어도 +2 수대).
 
 [현재 전장 상황]
 ---------------------------
@@ -165,7 +166,6 @@ ${JSON.stringify(aiState.board.map((m: any) => ({ id: m.id, name: m.name, atk: m
 ${JSON.stringify(playerState.board.map((m: any) => ({ id: m.id, name: m.name, atk: m.atk, hp: m.currentHp, keywords: m.keywords })))}
 
 ---------------------------
-위 조건들을 엄밀히 만족하는 최고의 하스스톤 플레이 시퀀스를 계산하십시오.
 제출할 액션 리스트의 종류:
 1. { "type": "PLAY_CARD", "cardHandIndex": N, "cardTemplateId": "CARD_TEMPLATE_ID", "targetId": "TARGET_ID" }
    - 카드를 냅니다. cardHandIndex는 내 패의 0-based 위치입니다. cardTemplateId는 내 패 카드 내의 "templateId" 값입니다.
@@ -174,6 +174,8 @@ ${JSON.stringify(playerState.board.map((m: any) => ({ id: m.id, name: m.name, at
    - 사용가능한 내 하수인으로 대상을 공격합니다. 적의 "도발(Taunt)" 하수인이 있다면 무조건 해당 도발 대상을 선타 격파하는 액션을 앞세워야 합니다!
 3. { "type": "HERO_ATTACK", "targetId": "적하수인_id 또는 player_hero" }
    - 만약 내 영웅이 무기를 갖고 있고 아직 이번 턴 공격하지 않았다면 직접 적을 후려칩니다. 도발 규칙 적용됩니다.
+4. { "type": "HERO_POWER", "targetId": "지정대상_id 또는 none" }
+   - 소비마나 2로 내 클래스 고유 영능을 발동합니다. 성기사(Paladin)/사냥꾼(Hunter)/전사(Warrior)는 targetId가 필요없으므로 "none"을 제공하고, 마법사(Mage)/사제(Priest)는 대상 하수인 ID 또는 "player_hero" / "ai_hero" 명치를 targetId로 제공하십시오.
 
 필요 계산이 모두 이루어지면, 최종 JSON 데이터 구조로 반환하십시오.
 {
@@ -206,7 +208,7 @@ ${JSON.stringify(playerState.board.map((m: any) => ({ id: m.id, name: m.name, at
                 properties: {
                   type: {
                     type: Type.STRING,
-                    description: "Action type: PLAY_CARD, ATTACK, or HERO_ATTACK"
+                    description: "Action type: PLAY_CARD, ATTACK, HERO_ATTACK, or HERO_POWER"
                   },
                   cardHandIndex: {
                     type: Type.INTEGER,

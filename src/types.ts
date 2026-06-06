@@ -44,9 +44,21 @@ export interface WeaponState {
   durability: number;
 }
 
+export interface QuestState {
+  id: string;
+  templateId: string;
+  name: string;
+  progress: number;
+  target: number;
+  description: string;
+  rewardName: string;
+  rewardTemplateId: string;
+}
+
 export interface PlayerState {
   hp: number;
   maxHp: number;
+  armor: number; // 방어도
   mana: number;
   maxMana: number;
   deck: Card[];
@@ -54,8 +66,11 @@ export interface PlayerState {
   board: BoardMinion[];
   weapon: WeaponState | null;
   hasAttackedThisTurn: boolean;
+  usedHeroPower: boolean; // 이번 턴에 영웅 무기/능력 사용 여부
   fatigueCount: number;
   cardDrawnCount: number;
+  heroClass: 'Mage' | 'Priest' | 'Paladin' | 'Hunter' | 'Warrior';
+  activeQuest?: QuestState | null;
 }
 
 export interface GameLog {
@@ -66,7 +81,7 @@ export interface GameLog {
   text: string;
 }
 
-export type GamePhase = 'START_SCREEN' | 'DRAFT_MODE_SELECT' | 'DRAFT_PACHAGE_PHASE' | 'DRAFT_ARENA_PHASE' | 'MULLIGAN_PHASE' | 'PLAY_PHASE' | 'GAME_OVER';
+export type GamePhase = 'START_SCREEN' | 'DRAFT_MODE_SELECT' | 'DRAFT_PACHAGE_PHASE' | 'DRAFT_ARENA_PHASE' | 'DECK_BUILDER_PHASE' | 'MULLIGAN_PHASE' | 'PLAY_PHASE' | 'GAME_OVER';
 
 export interface DraftChoice {
   cards: Card[];
@@ -85,8 +100,9 @@ export interface AppState {
   winner: 'player' | 'ai' | null;
   selectedActionCardIndex: number | null; // Selected hand card index for casting/playing
   selectedAttackerId: string | null; // BoardMinion.id or 'player_hero'
-  targetingMode: 'none' | 'spell' | 'battlecry' | 'attack' | 'weapon';
+  targetingMode: 'none' | 'spell' | 'battlecry' | 'attack' | 'weapon' | 'hero_power';
   targetingSourceIndex?: number; // hand index for play targets
   targetingAttackerId?: string; // attacker minion id or hero
   isPlayerFirst?: boolean;
+  gameMode?: 'prebuilt' | 'package' | 'arena' | 'tavern_brawl' | 'boss_fight';
 }

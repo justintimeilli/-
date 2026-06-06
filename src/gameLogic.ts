@@ -42,7 +42,14 @@ export function hasTauntMinion(board: BoardMinion[]): boolean {
 }
 
 // Create Initial State
-export function createInitialState(playerDeck: Card[], aiDeck: Card[], deckName: string): AppState {
+export function createInitialState(
+  playerDeck: Card[], 
+  aiDeck: Card[], 
+  deckName: string, 
+  gameMode?: 'prebuilt' | 'package' | 'arena' | 'tavern_brawl' | 'boss_fight',
+  playerClass: 'Mage' | 'Priest' | 'Paladin' | 'Hunter' | 'Warrior' = 'Mage',
+  aiClass: 'Mage' | 'Priest' | 'Paladin' | 'Hunter' | 'Warrior' = 'Hunter'
+): AppState {
   // Deep clone deck items
   const playerDeckCloned = playerDeck.map(c => ({ ...c, id: generateId('ply') }));
   const aiDeckCloned = aiDeck.map(c => ({ ...c, id: generateId('ai') }));
@@ -60,32 +67,41 @@ export function createInitialState(playerDeck: Card[], aiDeck: Card[], deckName:
   const pDeckShuffled = shuffle(playerDeckCloned);
   const aDeckShuffled = shuffle(aiDeckCloned);
 
+  const isTavern = gameMode === 'tavern_brawl';
+  const isBoss = gameMode === 'boss_fight';
+
   const initialPlayer: PlayerState = {
     hp: 30,
     maxHp: 30,
-    mana: 1,
-    maxMana: 1,
+    armor: 0,
+    mana: isTavern ? 10 : 1,
+    maxMana: isTavern ? 10 : 1,
     deck: pDeckShuffled,
     hand: [],
     board: [],
     weapon: null,
     hasAttackedThisTurn: false,
+    usedHeroPower: false,
     fatigueCount: 0,
-    cardDrawnCount: 0
+    cardDrawnCount: 0,
+    heroClass: playerClass
   };
 
   const initialAi: PlayerState = {
-    hp: 30,
-    maxHp: 30,
-    mana: 1,
-    maxMana: 1,
+    hp: isBoss ? 45 : 30,
+    maxHp: isBoss ? 45 : 30,
+    armor: isBoss ? 10 : 0, // Give Lich King boss some initial armor!
+    mana: isTavern ? 10 : 1,
+    maxMana: isTavern ? 10 : 1,
     deck: aDeckShuffled,
     hand: [],
     board: [],
     weapon: null,
     hasAttackedThisTurn: false,
+    usedHeroPower: false,
     fatigueCount: 0,
-    cardDrawnCount: 0
+    cardDrawnCount: 0,
+    heroClass: isBoss ? 'Warrior' : aiClass // Boss is Warrior
   };
 
   // Draw initial hands: 4 cards for player, 4 cards for AI
@@ -145,7 +161,8 @@ export function createInitialState(playerDeck: Card[], aiDeck: Card[], deckName:
     selectedActionCardIndex: null,
     selectedAttackerId: null,
     targetingMode: 'none',
-    isPlayerFirst
+    isPlayerFirst,
+    gameMode
   };
 }
 
@@ -321,6 +338,76 @@ export function computeRuleBasedAITurn(player: PlayerState, ai: PlayerState): { 
         targetId
       });
       madePlay = true;
+    }
+  }
+
+  // Step 1.5: Simulate using Hero Power if possible
+  if (simulatedMana >= 2) {
+    const heroClass = ai.heroClass;
+    let targetId = 'none';
+
+    if (heroClass === 'Mage') {
+      const alivePlayerMinions = getAliveTargets();
+      const pinMinion = alivePlayerMinions.find(m => m.currentHp === 1);
+      if (pinMinion) {
+        targetId = pinMinion.id;
+        pinMinion.currentHp -= 1;
+      } else {
+        targetId = 'player_hero';
+        tempPlayerHp -= 1;
+      }
+      actions.push({
+        type: 'HERO_POWER',
+        targetId
+      });
+      simulatedMana -= 2;
+    } else if (heroClass === 'Priest') {
+      const damagedFriendly = getAliveFriendly().find(m => m.currentHp < m.maxHp);
+      if (damagedFriendly) {
+        targetId = damagedFriendly.id;
+        damagedFriendly.currentHp = Math.min(damagedFriendly.maxHp, damagedFriendly.currentHp + 2);
+      } else {
+        targetId = 'ai_hero';
+        tempAiHp = Math.min(30, tempAiHp + 2);
+      }
+      actions.push({
+        type: 'HERO_POWER',
+        targetId
+      });
+      simulatedMana -= 2;
+    } else if (heroClass === 'Paladin') {
+      simulatedAiBoard.push({
+        id: generateId('recruit_sim'),
+        templateId: 'minion_recruit',
+        name: '은빛성전사 신병',
+        cost: 1,
+        atk: 1,
+        maxHp: 1,
+        currentHp: 1,
+        keywords: [],
+        hasDivineShield: false,
+        canAttack: false,
+        isAsleep: true,
+        hasAttackedThisTurn: false
+      });
+      actions.push({
+        type: 'HERO_POWER',
+        targetId: 'none'
+      });
+      simulatedMana -= 2;
+    } else if (heroClass === 'Hunter') {
+      tempPlayerHp -= 2;
+      actions.push({
+        type: 'HERO_POWER',
+        targetId: 'none'
+      });
+      simulatedMana -= 2;
+    } else if (heroClass === 'Warrior') {
+      actions.push({
+        type: 'HERO_POWER',
+        targetId: 'none'
+      });
+      simulatedMana -= 2;
     }
   }
 
